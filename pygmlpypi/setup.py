@@ -8,7 +8,7 @@ setup(
     description='Geographically Weighted Machine Learning',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
-    url='https://github.com/mointariq/gxgb',  # Replace with your actual GitHub repo URL
+    url='https://github.com/moin-t/PyGML/pygmlpypi',  
     packages=find_packages(),
     install_requires=[
         'pandas>=1.3.0',
