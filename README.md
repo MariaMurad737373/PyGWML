@@ -24,7 +24,7 @@ We have published PyGML as a Python package in PyPI. You can directly install it
 Below shows an example on how to fit a GXGB model and use it to make predictions.
 ```python
 
-from PyGML import GXGB, ISA_op_bw, 
+from PyGML import GXGB, ISA_op_bw
 from sklearn.model_selection import train_test_split
 
 #Get optimized Bandwidht
