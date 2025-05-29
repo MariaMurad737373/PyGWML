@@ -24,8 +24,11 @@ We have published PyGML as a Python package in PyPI. You can directly install it
 Below shows an example on how to fit a GXGB model and use it to make predictions.
 ```python
 
-from PyGML import GXGB
+from PyGML import GXGB, ISA_op_bw, 
 from sklearn.model_selection import train_test_split
+
+#Get optimized Bandwidht
+bandwidth, local_weight, p_value = ISA_op_bw(y_train,coords_train)
 
 #Instantiate GXGB model with chosen parameters
 model = GXGB(
@@ -53,9 +56,10 @@ print("R2 score (combined):", r2_score(y_test, y_pred))
 print("R2 score (global only):", r2_score(y_test, y_pred_global))
 print("R2 score (local only):", r2_score(y_test, y_pred_local))
 
-#(Optional) Get local feature importances from all local models
-fi_df = model.get_local_feature_importance()
-print(fi_df.head())
+#(Optional) #Get Feature Importances
+local_feature_importance=model.get_local_feature_importance()
+local_feature_importance=model.global_model.feature_importances_
+globally_enhanced_local_feature_importances=model.get_globally_enhanced_local_feature_importances()
 ```
 
 # Parameters
