@@ -260,11 +260,46 @@ Additional parameters can be found in the XGBoostRegressor parameters documentat
         
         return pd.DataFrame(imp_data, columns=["model_index"] + self.train_data_columns)
 
+    def get_globally_enhanced_local_feature_importances(self, normalize_local=True, normalize_global=True):
+        """
+    Returns a DataFrame of local feature importances multiplied element-wise
+    by global feature importance.
+
+    Parameters
+    ----------
+    normalize_local : bool, default=True
+        Normalize local feature importance vectors (per sample) to sum to 1.
+    normalize_global : bool, default=True
+        Normalize global feature importance vector to sum to 1.
+
+    Returns
+    -------
+    pd.DataFrame
+        DataFrame of shape (n_samples, n_features) with enhanced feature importances.
+        """
+        if not self.local_models or self.global_model is None:
+            raise ValueError("Models not fitted. Call `fit` first.")
+    
+        # Local importances matrix: (n_samples, n_features)
+        local_importances = np.array([model.feature_importances_ for model in self.local_models])
+        if normalize_local:
+            local_importances = local_importances / local_importances.sum(axis=1, keepdims=True)
+    
+        # Global importance vector: (n_features,)
+        global_importance = self.global_model.feature_importances_
+        if normalize_global:
+            global_importance = global_importance / global_importance.sum()
+    
+        # Element-wise multiply local importance by global importance per feature
+        enhanced_importances = local_importances * global_importance
+        return pd.DataFrame(enhanced_importances, columns=self.train_data_columns)
 
 def ISA_op_bw(y, coords, bw_min=None, bw_max=None, step=1):
     '''
     Determine the optimal bandwidth by applying Incremental Spatial Autocorrelation (ISA).
-Parameters
+Maximize Moran's I (spatial autocorr), hence it is good for bandwidth calcultaion 
+when target is Statistical spatial analysis of Data.
+Parameters:
 ----------
 y : pandas.Series
     Target variable values for all data points.
@@ -332,8 +367,9 @@ def search_bandwidth(X, y, coords,
                      n_jobs=1,
                      random_state=None):
     """
-Search for the optimal spatial bandwidth for geographically weighted XGBoost regression.
-
+Searches for the optimal spatial bandwidth for geographically weighted XGBoost regression.
+Maximize predictive performance, hence it is useful to calculate bandwidth when tt otest
+Validation-based model performance.
     Parameters
     ----------
     X : pd.DataFrame
