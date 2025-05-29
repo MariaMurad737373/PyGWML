@@ -1,6 +1,10 @@
 # PyGML (Geographically Weighted Machine Learning in Python)
-Python 3 Based Implementation of Geographically Weighted Machine Learning Models such as GXGB (Geographically Weighted XGBoost), GWMLP (Geographically Weighted Multi-layer Perceptrons) and GWRNN (Geographically Weighted RNN).
-This repository contains the source code and parameter descriptions of each PyGML model, and Jupyter Notebooks and related datasets for Housing Price Prediction.
+Python 3 Based Implementation of Geographically Weighted Machine Learning Models such as:
+ - GXGB (Geographically Weighted XGBoost).
+ - GWMLP (Geographically Weighted Multi-layer Perceptrons).
+ - GWRNN (Geographically Weighted RNN).
+   
+This repository contains the source code and parameter descriptions of each PyGML model, and Jupyter Notebooks and related datasets for Housing Price Prediction etc.
 
 # Repository organization
  - The file "PyGML.py" is the source code of this Python-based ML models.
@@ -13,11 +17,12 @@ This repository contains the source code and parameter descriptions of each PyGM
 We have published PyGML as a Python package in PyPI. You can directly install it with the command "pip install PyGML".
 
 # Potential issues and solutions
-PyGML requires the pacakge esda as a dependency for computing Moran's Index. We recommend users to install esda 2.5, and then PyGML can be used smoothly with any additional action. If you use the latest version of esda 2.6, you will need to install matplotlib manually in order to import PyGRF successfully.
+ - PyGML requires the pacakge esda as a dependency for computing Moran's Index. We recommend users to install esda 2.5, and then PyGML can be used smoothly with any additional action. If you use the latest version of esda 2.6, you will need to install matplotlib manually in order to import PyGML successfully.
+ - Libpysal is used specifically for the Incremental Spatial Autocorrelation (ISA) analysis to help find the optimal spatial bandwidth (ISA_op_bw function).  libpysal >= 4.4.0 is needed to be installed for this.
 
-# Example
+# Example 1: Implementation GXGB Model
 Below shows an example on how to fit a GXGB model and use it to make predictions.
-'''
+```python
 
 from PyGML import GXGB
 from sklearn.model_selection import train_test_split
@@ -47,13 +52,11 @@ y_pred, y_pred_global, y_pred_local = model.predict(X_test, coords_test, local_w
 print("R2 score (combined):", r2_score(y_test, y_pred))
 print("R2 score (global only):", r2_score(y_test, y_pred_global))
 print("R2 score (local only):", r2_score(y_test, y_pred_local))
-print("RMSE (combined):", np.sqrt(mean_squared_error(y_test, y_pred)))
 
 #(Optional) Get local feature importances from all local models
 fi_df = model.get_local_feature_importance()
 print(fi_df.head())
-
-'''
+```
 
 # Parameters
 If you want to learn more about the major parameters in this package, please refer to the Description of Parameters.
