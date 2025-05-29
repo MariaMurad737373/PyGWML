@@ -64,10 +64,10 @@ If you want to learn more about the major parameters in this package, please ref
 
 # Authors
  - Moin tariq - AI for Digital Earth Lab, Shandong University, Jinan, China - Email: sci.mointariq@gmail.com, moin.tariq@mail.sdu.edu.cn , moin.bsma1810@iiu.edu.pk
- - Muhammad Irfan Haider Khan - Key Laboratory of Artificial Intelligence, Optics and Electronics (iOPEN), NWPU, Xi’an, Shaanxi, China - Email: vice.haider@gmail.com
+ - Muhammad Irfan Haider Khan - Key Laboratory of Artificial Intelligence, Optics and Electronics (iOPEN), NWPU, Xi’an, Shaanxi, China - Email: vice.haider@gmail.com, irfan.khan@mail.nwpu.edu.cn
    
 # Reference
 If you use the data or code from this repository, or the PyGML package, we will really appreciate if you can cite our paper:
 
-- Moin Tariq, Zhihua Zhang, Geographically Weighted xtreme Gradient Boost Modeling of Housing Price Determinents in Islamabad, Pakistan
+- Moin Tariq, Zhihua Zhang, Geographically Weighted xtreme Gradient Boost Modeling of Housing Price Determinents in Islamabad, Pakistan.
 
