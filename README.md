@@ -1,30 +1,30 @@
-# PyGML (Geographically Weighted Machine Learning in Python)
+# Pygwml (Geographically Weighted Machine Learning in Python)
 Python 3 Based Implementation of Geographically Weighted Machine Learning Models such as:
  - GXGB (Geographically Weighted XGBoost).
  - GWMLP (Geographically Weighted Multi-layer Perceptrons).
  - GWRNN (Geographically Weighted RNN).
    
-This repository contains the source code and parameter descriptions of each PyGML model, and Jupyter Notebooks and related datasets for Housing Price Prediction etc.
+This repository contains the source code and parameter descriptions of each Pygwml model, and Jupyter Notebooks and related datasets for Housing Price Prediction etc.
 
 # Repository organization
- - The file "PyGML.py" is the source code of this Python-based ML models.
- - The file "Description_Parameters.pdf" explains the details of parameters in each model.
+ - The file "Pygwml.py" is the source code of this Python-based ML models.
+ - The file "Description_Parameters" explains the details of parameters in each model.
  - The folder "Notebooks" contains three Jupyter Notebooks used for implementing two Housing Price predictions cases and one Climate data modeling case. 
  - The folder "Data" contains the Housing dataset1, Housing dataset2 and Climate dataset used for application of GXGB, GWMLP and GWRNN Models respectively.
  - The folder "Test" contains the Python file for the unit test for the PyGML package. The Pytest package is needed to run this file.
 
 # Installation
-We have published PyGML as a Python package in PyPI. You can directly install it with the command "pip install PyGML".
+We have published Pygwml as a Python package in PyPI. You can directly install it with the command "pip install pygwml".
 
 # Potential issues and solutions
- - PyGML requires the pacakge esda as a dependency for computing Moran's Index. We recommend users to install esda 2.5, and then PyGML can be used smoothly with any additional action. If you use the latest version of esda 2.6, you will need to install matplotlib manually in order to import PyGML successfully.
+ - Pygwml requires the pacakge esda as a dependency for computing Moran's Index. We recommend users to install esda 2.5, and then Pygwml can be used smoothly with any additional action. If you use the latest version of esda 2.6, you will need to install matplotlib manually in order to import PyGML successfully.
  - Libpysal is used specifically for the Incremental Spatial Autocorrelation (ISA) analysis to help find the optimal spatial bandwidth (ISA_op_bw function).  libpysal >= 4.4.0 is needed to be installed for this.
 
 # Example 1: Implementation GXGB Model
 Below shows an example on how to fit a GXGB model and use it to make predictions.
 ```python
 
-from PyGML import GXGB, ISA_op_bw
+from pygwml import GXGB, ISA_op_bw
 from sklearn.model_selection import train_test_split
 
 #Get optimized Bandwidht
