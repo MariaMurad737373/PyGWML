@@ -5,7 +5,7 @@ Python 3 Based Implementation of Geographically Weighted Machine Learning Models
  - GWRNN (Geographically Weighted RNN).
    
 # Installation
-This package is published in PyPi Package Indexing. You can directly install it with the command:
+This package is published in PyPi Package Indexing (https://pypi.org/project/pygwml/). You can directly install it with the command:
 ```python
 
 $ pip install pygwml
