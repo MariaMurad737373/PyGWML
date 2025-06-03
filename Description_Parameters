@@ -1,1 +1,109 @@
+•	class GXGB(band_width, kernel="adaptive", n_estimators=100, learning_rate=0.3, colsample_bytree=1.0, subsample=1.0, min_child_weight=1.0, max_depth=6, train_weighted=True, predict_weighted=True, random_state=None)
+Python implementation of GXGB
+Parameters:   band_width: int or float
+Defines the spatial extent used to select neighbors for local model fitting:
+- If (kernel="adaptive"), it represents the number of nearest neighbors.
+- If (kernel="fixed"), it specifies the fixed distance threshold within which neighbors are considered.
+    n_estimators: int (default=100)  
+        Number of boosting rounds (trees).
+    learning_rate / eta: float (default= 0.3)  
+        Step size shrinkage (e.g., 0.01–0.3).
+    max_depth: int (default=6)  
+        Maximum depth of each tree.
+    min_child_weight: float (default=1.0)  
+        Minimum sum of weights needed in a child.
+    subsample: float  (default=1.0)  
+        Fraction of training samples used per tree.
+    colsample_bytree: float  (default=1.0)  
+        Subsample ratio of columns per tree.
+    train_weighted: bool, default = True
+        Whether samples are weighted based on distances for   training local models. If False, samples are equally weighted.
+    predict_weighted: bool, default = True
+        Whether the ensemble of local models within the bandwidth is used and spatially weighted for producing local predictions. If False, only closest local model is used for producing local predictions.
+random_state: int, instance of Numpy RandomState or None, default=None
+To ensure consistent model outputs, set this parameter to a fixed value—it controls the internal randomness of the fitting process. Refer to scikit-learn’s  for further clarification. Link: https://scikitlearn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html.
+•	Method GXGB.fit(self, X_train, y_train, coords)
+To fit GXGB model.
+Parameters:  X_train: pd.DataFrame
+            Independent variables (Features) of training samples.
+        y_train: pd.Series
+            Dependent variable (Target) of training samples.
+        coords: pd.DataFrame
+            2D coordinates of training samples (projected).
+Return:      global_oob_prediction: list 
+ 	The OOB prediction from the global model 
+local_oob_prediction: list 
+              The OOB prediction from the local models
+•	Method GXGB.predict(self, X_test, coords_test, local_weight=0.5)
+Make predictions for test data using fitted model.
+        X_test: pd.DataFrame
+            Independent variables of test samples.
+        coords_test: pd.DataFrame
+            Coordinates of test samples (projected).
+        local_weight: float, default=0.5
+            Weight for combining global and local predictions (0-1).
+
+        Return:  tuple: (combined_pred, global_pred, local_pred)
+            combined_pred: Combined predictions
+            global_pred: Global model predictions
+            local_pred: Local model predictions
+•	method GXGB.get_local_feature_importance(self)
+Get local feature importance from XGBoost models.
+Returns:    feature_importance_df: pd.DataFrame
+            Feature importance for each local model.
+•	function ISA_op_bw(y, coords, bw_min=None, bw_max=None, step=1): 
+    Determine the optimal bandwidth by applying Incremental Spatial Autocorrelation (ISA).
+Parameters:  y: pandas.Series
+    Target variable values for all data points.
+coords: pandas.DataFrame
+    Two-dimensional spatial coordinates for each data point (ideally in a projected coordinate system).
+bw_min: int, optional
+    Starting value for the bandwidth search range (default is 1).
+bw_max: int, optional
+    Ending value for the bandwidth search range (default is the total number of observations).
+step: int, optional
+    Increment step for bandwidth values during the search (default is 1).
+
+Returns:   optimal_bandwidth : int
+    Bandwidth value selected as optimal based on ISA analysis.
+moran_I_value : float
+    Moran's I statistic corresponding to the optimal bandwidth.
+p_value : float
+    Statistical significance (p-value) of the Moran's I at the optimal bandwidth.
+•	function search_bandwidth(X, y, coords, n_estimators, max_depth, min_child_weight, subsample, train_weighted=True, bw_min=None, bw_max=None, step=1, test_size=0.2, n_jobs=1, random_state=None)
+Search for the optimal spatial bandwidth for geographically weighted XGBoost regression.
+
+    Parameters    X: pd.DataFrame
+        Input features.
+    y: pd.Series
+        Target variable.
+    coords: pd.DataFrame or np.array
+        Spatial coordinates of samples (shape: [n_samples, 2]).
+    n_estimators: int
+        Number of trees for XGBoost.
+    max_depth: int
+        Maximum tree depth for base learners.
+    min_child_weight: int or float
+        Minimum sum of instance weight needed in a child.
+    subsample: float
+        Subsample ratio of the training instances.
+    train_weighted: bool, optional
+        Whether to weight samples based on spatial proximity during training (default True).
+    bw_min: int, optional
+        Minimum bandwidth.
+    bw_max: int, optional
+        Maximum bandwidth.
+    step: int, optional
+        Step size for bandwidth.
+    test_size: float, optional
+        Proportion of data to hold out for validation.
+    n_jobs: int, optional
+        Number of parallel jobs for XGBoost (default 1).
+    random_state: int or None
+        Random seed for reproducibility.
+
+    Return:  dict
+        Contains DataFrame of bandwidths and scores and the best bandwidth.
+
+
 
