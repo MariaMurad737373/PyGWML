@@ -53,11 +53,3 @@ globally_enhanced_local_feature_importances=model.get_globally_enhanced_local_fe
 # Parameters
 If you want to learn more about the major parameters in this package, please refer to the Description of Parameters(https://github.com/moin-t/PyGWML/Description_Parameters).
 
-
-# Authors
- - Moin tariq - AI for Digital Earth Lab, Shandong University, Jinan, China - Email: sci.mointariq@gmail.com, moin.tariq@mail.sdu.edu.cn , moin.bsma1810@iiu.edu.pk
- - Muhammad Irfan Haider Khan - Key Laboratory of Artificial Intelligence, Optics and Electronics (iOPEN), NWPU, Xi’an, Shaanxi, China - Email: vice.haider@gmail.com, irfankhan@mail.nwpu.edu.cn
-
-# Reference
-
- - Moin Tariq, Zhihua Zhang, "Geographically weighted eXtreme Gradient Boosting for modeling spatial heterogeneity in Housing Price in Islamabad City, Pakistan."
